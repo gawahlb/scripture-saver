@@ -1,1 +1,16 @@
-<p>scripture-list works!</p>
+<div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="row pad-left-right">
+        <span class="pull-left title">Scriptures</span>
+        <a class="btn btn-success pull-right" routerLink="new">Add Scripture</a>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="center-panel">
+        <app-scripture-item
+          *ngFor="let scripture of scriptures"
+          [scripture]="scripture"></app-scripture-item>
+      </div>
+    </div>
+      
+  </div>

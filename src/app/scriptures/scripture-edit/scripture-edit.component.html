@@ -1,1 +1,69 @@
-<p>scripture-edit works!</p>
+<div class="panel panel-default">
+    <div class="panel-body">
+  
+      <form id="scripture-edit" #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div class="row">
+          <div class="col-sm-12 form-group">
+            <label for="verse">Verse:</label>
+            <input
+              type="text"
+              #name="ngModel"
+              id="verse"
+              name="verse"
+              class="form-control"
+              size="120"
+              max="120"
+              [ngModel]="scripture?.verse"
+              required>
+          </div>
+        </div>
+  
+        <div class="row">
+          <div class="col-sm-12 form-group">
+            <label for="notes">Notes:</label>
+            <input
+              type="text"
+              id="notes"
+              name="notes"
+              class="form-control"
+              size="120"
+              max="255"
+              [ngModel]="scripture?.notes"
+              >
+          </div>
+        </div>
+  
+        <div class="row">
+          <div class="col-sm-12 form-group">
+            <label for="url">Scripture URL:</label>
+            <input
+              #url="ngModel"
+              type="text"
+              id="url"
+              name="url"
+              class="form-control"
+              size="150"
+              max="255"
+              [ngModel]="Scripture?.url">
+              <div 
+                class="alert alert-danger"
+                *ngIf="verse.invalid">The Verse is a required field.</div>
+          </div>
+        </div>
+  
+        <div class="row">
+          <div class="col-xs-12 btn-toolbar">
+            <button 
+              class="btn btn-success" 
+              type="submit"
+              *ngIf="f.valid">Save</button>
+            <button class="btn btn-primary" type="button" (click)="onCancel()">Cancel</button>
+          </div>
+        </div>
+  
+      </form>
+  
+    </div>
+  </div>
+  
+  
