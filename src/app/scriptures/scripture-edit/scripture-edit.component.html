@@ -7,7 +7,7 @@
             <label for="verse">Verse:</label>
             <input
               type="text"
-              #name="ngModel"
+              #verse="ngModel"
               id="verse"
               name="verse"
               class="form-control"
@@ -44,10 +44,10 @@
               class="form-control"
               size="150"
               max="255"
-              [ngModel]="Scripture?.url">
+              [ngModel]="scripture?.url">
               <div 
                 class="alert alert-danger"
-                *ngIf="verse.invalid">The Verse is a required field.</div>
+                *ngIf="verse?.invalid">The Verse is a required field.</div>
           </div>
         </div>
   
