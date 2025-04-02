@@ -62,6 +62,7 @@ export class ScriptureService {
 
     getScripture(id: string): Scripture {
         return this.scriptures.find(scripture => scripture.id == id) || null;
+        
     }
 
     deleteScripture(scripture: Scripture) {

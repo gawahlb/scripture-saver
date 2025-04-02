@@ -1,25 +1,23 @@
 <div class="panel panel-default" xmlns="http://www.w3.org/1999/html">
+  <div class="col-md-8 offset-md-8">
     <div class="panel-heading">
       <div class="row pad-all">
         <h4 class="title margin-left-right">{{scripture.verse}}</h4>
-        <div class="row pull-right margin-left-right">
-          <a [routerLink]="['/scriptures', scripture.id, 'view']" class="btn btn-primary" (click)="onView()">View</a>
-          <a [routerLink]="['/scriptures', scripture.id, 'edit']" class="btn btn-info" >Edit</a>
-          <a [routerLink]="['/scriptures', scripture.id, 'delete']" (click)="onDelete()" class="btn btn-danger">Delete</a>
+        <div class="row pull-right margin-left-right col-md-6">
+          <a [routerLink]="['/scriptures', scripture?.id, 'view']" class="btn btn-primary" (click)="onView()" style="margin-bottom: 10px;">View</a>
+          <a [routerLink]="['/scriptures', scripture?.id, 'edit']" class="btn btn-info" style="margin-bottom: 10px;" >Edit</a>
+          <a [routerLink]="['/scriptures', scripture?.id, 'delete']" (click)="onDelete()" class="btn btn-danger">Delete</a>
         </div>
       </div>
     </div>
     <div class="panel-body">
       <div class="pad-left-right">
         <div class="row">
-          <label>Description:</label>
+          <label>Notes:</label>
           <span class="label-value">{{ scripture.notes }}</span>
         </div>
         <br>
-        <div class="row">
-          <label>URL:</label>
-          <span class="label-value">{{ scripture.url }}</span>
-        </div>
       </div>
     </div>
+  </div>
   </div>

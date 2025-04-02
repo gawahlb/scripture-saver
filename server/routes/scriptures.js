@@ -23,14 +23,9 @@ router.get('/', (req, res, next) => {
     });
 });
 
-router.post('/', (req, res, next) => {
-    const maxScriptureId = sequenceGenerator.nextId("scriptures")
-    .then(() => {
-      console.log('Connected to database!');
-    })
-    .catch(() => {
-      console.log('Connection failed.');
-    });
+router.post('/', async (req, res, next) => {
+  try {  
+  const maxScriptureId = await sequenceGenerator.nextId("scriptures")
   
     const scripture = new Scripture({
       id: maxScriptureId,
@@ -52,6 +47,12 @@ router.post('/', (req, res, next) => {
             error: err
           });
       });
+    } catch (err) {
+      res.status(500).json({
+        message: 'An error occurred generating ID',
+        error: err
+      });
+    }
   });
 
   router.put('/:id', (req, res, next) => {

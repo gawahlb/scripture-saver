@@ -1,5 +1,6 @@
 <div class="panel panel-default">
     <div class="panel-body">
+      <div class="col-md-8 offset-md-8">
   
       <form id="scripture-edit" #f="ngForm" (ngSubmit)="onSubmit(f)">
         <div class="row">
@@ -21,15 +22,13 @@
         <div class="row">
           <div class="col-sm-12 form-group">
             <label for="notes">Notes:</label>
-            <input
-              type="text"
+            <textarea
               id="notes"
               name="notes"
               class="form-control"
-              size="120"
-              max="255"
+              rows="6"
               [ngModel]="scripture?.notes"
-              >
+              ></textarea>
           </div>
         </div>
   
@@ -52,11 +51,11 @@
         </div>
   
         <div class="row">
-          <div class="col-xs-12 btn-toolbar">
+          <div class="col-xs-12 btn-toolbar" style="margin-top: 10px;">
             <button 
               class="btn btn-success" 
               type="submit"
-              *ngIf="f.valid">Save</button>
+              *ngIf="f.valid" style="margin-right: 10px">Save</button>
             <button class="btn btn-primary" type="button" (click)="onCancel()">Cancel</button>
           </div>
         </div>
@@ -64,6 +63,7 @@
       </form>
   
     </div>
+  </div>
   </div>
   
   
