@@ -11,7 +11,7 @@ const scripturesRoutes = require('./server/routes/scriptures');
 
 (async () => {
   try {
-    await mongoose.connect('mongodb://localhost:27017/cms', {
+    await mongoose.connect('mongodb://localhost:27017/scripture-saver', {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });
@@ -44,14 +44,10 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.static(path.join(__dirname, 'dist/cms/browser')));
+app.use(express.static(path.join(__dirname, 'dist/scripture-saver/browser')));
 
 app.use('/', index);
 app.use('/scriptures', scripturesRoutes);
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/cms/browser/index.html'));
-});
 
 const port = process.env.PORT || '3000';
 app.set('port', port);
@@ -62,6 +58,7 @@ server.listen(port, function() {
   console.log('API running on localhost: ' + port)
 });
 
-
-
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist/scripture-saver/browser/index.html'));
+});
 

@@ -7,9 +7,30 @@ const { error } = require('node:console');
 module.exports = router; 
 
 
+router.get('/', (req, res, next) => {
+  Scripture.find()
+    .then(scriptures => {
+      res.status(200).json({
+        message: 'Scriptures fetched successfully!',
+        scriptures: scriptures
+      });
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: 'An error occurred!',
+        error: err
+      });
+    });
+});
 
 router.post('/', (req, res, next) => {
-    const maxScriptureId = sequenceGenerator.nextId("scriptures");
+    const maxScriptureId = sequenceGenerator.nextId("scriptures")
+    .then(() => {
+      console.log('Connected to database!');
+    })
+    .catch(() => {
+      console.log('Connection failed.');
+    });
   
     const scripture = new Scripture({
       id: maxScriptureId,

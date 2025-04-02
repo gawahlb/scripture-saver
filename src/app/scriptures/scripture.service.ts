@@ -18,7 +18,6 @@ export class ScriptureService {
     scriptures: Scripture[] = []
 
     constructor(private http: HttpClient) {
-        this.maxScriptureId = this.getMaxId();
         this.fetchScriptures();
     }
 
@@ -28,10 +27,10 @@ export class ScriptureService {
       }
 
     fetchScriptures() {
-        this.http.get<Scripture[]>(this.url)
+        this.http.get<{ message: string, scriptures: Scripture[] }>(this.url)
             .subscribe(
-                (scriptures: Scripture[]) => {
-                    this.scriptures = scriptures;
+                (response) => {
+                    this.scriptures = response.scriptures;
                     this.maxScriptureId = this.getMaxId();
                     this.scriptures.sort((a,b) => a.verse.localeCompare(b.verse));
                     this.scriptureListChangedEvent.next(this.scriptures.slice());
@@ -88,17 +87,19 @@ export class ScriptureService {
       }
 
     getMaxId(): number {
-        let maxId = 0;
+      if(!this.scriptures || this.scriptures.length === 0) {
+        return 0;
+      }
+      let maxId = 0;
 
-        for (let scripture of this.scriptures) {
-            let currentId = parseInt(scripture.id);
+      for (let scripture of this.scriptures) {
+          let currentId = parseInt(scripture.id);
+          if (currentId > maxId) {
+              maxId = currentId;
+          }
+      }
 
-            if (currentId > maxId) {
-                maxId = currentId;
-            }
-        }
-
-        return maxId;
+      return maxId;
     }
 
     addScripture(scripture: Scripture) {
